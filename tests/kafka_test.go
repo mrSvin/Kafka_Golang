@@ -17,7 +17,7 @@ var checkMessage = false
 
 func Test_Kafka(t *testing.T) {
 
-	client := provider.CreateClientKafka([]string{"localhost:9092"})
+	client := provider.CreateClientKafka([]string{"localhost:9092", "localhost:9093", "localhost:9094"})
 	defer client.Close()
 
 	producer := provider.CreateProducer(client)
@@ -58,6 +58,6 @@ func listenerMessages(partitionConsumer sarama.PartitionConsumer, searchMessage 
 		if searchMessage == string(message.Value) {
 			checkMessage = true
 		}
-
+		partitionConsumer.AsyncClose()
 	}
 }

@@ -18,3 +18,24 @@ services:
     depends_on:
       - zookeeper
 
+  kafka-1:
+    image: bitnami/kafka
+    hostname: kafka-1
+    ports:
+      - 9093:9093
+    environment:
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9093
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+
+  kafka-2:
+    image: bitnami/kafka
+    hostname: kafka-1
+    ports:
+      - 9094:9094
+    environment:
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9094
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
